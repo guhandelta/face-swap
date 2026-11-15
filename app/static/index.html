@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fast Swap</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <h1>Fast Swap</h1>
+  <p class="sub">Put the face from one photo onto another.</p>
+  <p id="status" class="status">Checking server…</p>
+</header>
+
+<main>
+  <section class="pickers">
+    <div class="picker" data-role="source">
+      <h2>1. Source face</h2>
+      <label class="drop">
+        <input type="file" accept="image/*" hidden>
+        <div class="stage"><img alt=""><div class="boxes"></div><span class="hint">Drop or choose an image</span></div>
+      </label>
+      <p class="faces-note"></p>
+    </div>
+    <div class="picker" data-role="target">
+      <h2>2. Target image</h2>
+      <label class="drop">
+        <input type="file" accept="image/*" hidden>
+        <div class="stage"><img alt=""><div class="boxes"></div><span class="hint">Drop or choose an image</span></div>
+      </label>
+      <p class="faces-note"></p>
+    </div>
+  </section>
+
+  <section class="controls">
+    <label>Quality
+      <select id="res">
+        <option value="128">Fast (128 px)</option>
+        <option value="256" selected>High (256 px)</option>
+        <option value="512">Maximum (512 px, slow)</option>
+      </select>
+    </label>
+    <label>Detail restore
+      <select id="restorer">
+        <option value="auto" selected>Auto</option>
+        <option value="codeformer">CodeFormer</option>
+        <option value="gfpgan">GFPGAN</option>
+        <option value="gpen_1024">GPEN 1024 (large faces)</option>
+        <option value="gpen_512">GPEN 512</option>
+        <option value="restoreformer">RestoreFormer++</option>
+        <option value="none">Off</option>
+      </select>
+    </label>
+    <label>Blending
+      <select id="blend">
+        <option value="feather" selected>Soft edge (best for most photos)</option>
+        <option value="poisson">Poisson (strong lighting differences)</option>
+        <option value="basic">Basic (fastest, no matching)</option>
+      </select>
+    </label>
+    <label><input type="checkbox" id="color" checked> Match skin tone</label>
+    <label><input type="checkbox" id="lighting" checked> Match lighting &amp; shadows</label>
+    <label><input type="checkbox" id="occlusion" checked> Keep hair, glasses &amp; hands</label>
+    <label><input type="checkbox" id="sharp" checked> Match focus</label>
+    <label><input type="checkbox" id="grain" checked> Match grain</label>
+  </section>
+  <section class="controls">
+    <label><input type="checkbox" id="consent"> Everyone pictured has agreed to this use</label>
+    <button id="go" disabled>Swap faces</button>
+  </section>
+
+  <section class="result" hidden>
+    <h2>Result</h2>
+    <ul id="warnings" class="warnings"></ul>
+    <img id="result" alt="Swapped result">
+    <a id="download" download="fast-swap.png">Download</a>
+  </section>
+  <p id="error" class="error" role="alert"></p>
+</main>
+
+<footer>Use only with consent. Do not create content that impersonates or deceives.</footer>
+<script src="/static/app.js"></script>
+</body>
+</html>
