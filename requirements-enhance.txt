@@ -1,0 +1,2 @@
+# No longer needed: face restoration now runs through ONNX Runtime (see
+# scripts/download_models.py). This file is kept only so old instructions don't break.
